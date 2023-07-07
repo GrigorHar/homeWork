@@ -1,26 +1,25 @@
 function promisesRejectionNumChecker(listOfPromises, rejectionThreshold) {
-  return new Promise((resolve, reject) => {
-    let rejectedCount = 0;
+  let rejectedCount = 0;
 
-    const handleRejection = () => {
-      rejectedCount++;
-      if (rejectedCount > rejectionThreshold) {
-        reject(new Error(`Number of rejected promises exceeded the threshold of ${rejectionThreshold}`));
-      }
-    };
-
-    for (const promise of listOfPromises) {
-      promise.catch(handleRejection);
+  const handleRejection = () => {
+    rejectedCount++;
+    if (rejectedCount > rejectionThreshold) {
+      throw new Error(`Number of rejected promises exceeded the threshold of ${rejectionThreshold}`);
     }
+  };
 
-    Promise.allSettled(listOfPromises)
-      .then(() => {
-        if (rejectedCount <= rejectionThreshold) {
-          resolve();
-        }
-      })
-      .catch(reject);
-  });
+  for (const promise of listOfPromises) {
+    promise.catch(handleRejection);
+  }
+
+  return Promise.allSettled(listOfPromises)
+    .then(() => {
+      if (rejectedCount <= rejectionThreshold) {
+        return;
+      } else {
+        throw new Error(`Number of rejected promises exceeded the threshold of ${rejectionThreshold}`);
+      }
+    });
 }
 
 module.exports = { promisesRejectionNumChecker };
