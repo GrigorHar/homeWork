@@ -1,11 +1,6 @@
-# Promises Rejection Number Checker
+ # Promises Rejection Number Checker
 
 This project provides a method to check the number of rejected promises against a given threshold.
-
-## Usage
-
-The `promisesRejectionNumChecker` function takes in two parameters: `listOfPromises` (an array of promises) and `rejectionThreshold` (the maximum number of allowed rejections). It returns a promise that resolves if the number of rejected promises is not greater than the threshold or rejects otherwise.
-
 
 ## Installation
 To use this module, you need to have Node.js installed. Then, follow these steps:
