@@ -1,4 +1,4 @@
- function myPromise(listOfPromises, number) {
+ function promisesRejectionNumChecker(listOfPromises, number) {
   let rejectedCount = 0;
 
   return new Promise((resolve, reject) => {
@@ -18,4 +18,4 @@
     }, 0);
   });
 }
-module.exports = { myPromise };
+module.exports = { promisesRejectionNumChecker };
