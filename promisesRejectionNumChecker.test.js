@@ -1,6 +1,6 @@
- const { myPromise } = require('./promisesRejectionNumChecker');
+ const { promisesRejectionNumChecker } = require('./promisesRejectionNumChecker');
 
-describe('myPromise', () => {
+describe('promisesRejectionNumChecker', () => {
 
   it('should resolve with "resolved" if the number of rejected promises is not greater than the specified number', async () => {
     const promises = [
@@ -9,7 +9,7 @@ describe('myPromise', () => {
       Promise.reject(),
     ];
 
-    const result = await myPromise(promises, 1);
+    const result = await promisesRejectionNumChecker(promises, 1);
     expect(result).toBe('resolved');
   });
 
@@ -20,7 +20,7 @@ describe('myPromise', () => {
       Promise.reject(),
     ];
 
-    await expect(myPromise(promises, 1)).rejects.toThrowError('Too many promises rejected');
+    await expect(promisesRejectionNumChecker(promises, 1)).rejects.toThrowError('Too many promises rejected');
   });
 
   it('should resolve with "resolved" if the number of rejected promises is zero', async () => {
@@ -29,7 +29,7 @@ describe('myPromise', () => {
       Promise.resolve(2),
     ];
 
-    const result = await myPromise(promises, 0);
+    const result = await promisesRejectionNumChecker(promises, 0);
     expect(result).toBe('resolved');
   });
 
@@ -39,7 +39,7 @@ describe('myPromise', () => {
       Promise.reject(),
     ];
 
-    const result = await myPromise(promises, 1);
+    const result = await promisesRejectionNumChecker(promises, 1);
     expect(result).toBe('resolved');
   });
 
@@ -50,7 +50,7 @@ describe('myPromise', () => {
       Promise.reject(),
     ];
 
-    const result = await myPromise(promises, 2);
+    const result = await promisesRejectionNumChecker(promises, 2);
     expect(result).toBe('resolved');
   });
 
@@ -61,6 +61,6 @@ describe('myPromise', () => {
       Promise.reject(),
     ];
   
-    await expect(myPromise(promises, 2)).rejects.toThrowError('Too many promises rejected');
+    await expect(promisesRejectionNumChecker(promises, 2)).rejects.toThrowError('Too many promises rejected');
   });
 });
