@@ -1,4 +1,4 @@
- function promisesRejectionNumChecker(listOfPromises, number) {
+ function promisesRejectionNumChecker(listOfPromises, rejectionTheshold) {
   let rejectedCount = 0;
 
   return new Promise((resolve, reject) => {
@@ -10,7 +10,7 @@
     });
 
     setTimeout(() => {
-      if (rejectedCount <= number) {
+      if (rejectedCount <= rejectionTheshold) {
         resolve("resolved");
       } else {
         reject(new Error('Too many promises rejected'));
